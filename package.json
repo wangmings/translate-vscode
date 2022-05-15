@@ -1,0 +1,93 @@
+{
+    
+    "name": "chinese-change-var",
+    "displayName": "中文转换变量",
+    "description": "还在纠结怎么给变量和函数命名吗? 中文一键翻译转换成常用大小驼峰等格式",
+    "publisher": "translate",
+    "icon": "images/logo.jpg",
+    "version": "0.0.1",
+    "watch": "webpack --watch",
+    "engines": {
+        "vscode": "^1.66.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.chinese-change-var"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "keybindings": [
+            {
+                "command": "extension.chinese-change-var",
+                "key": "Alt+shift+t",
+                "mac": "cmd+shift+t"
+            }
+        ],
+        "commands": [
+            {
+                "command": "extension.chinese-change-var",
+                "title": "中文转换变量",
+                "when": "editorTextFocus",
+                "category": "chinese-change-var"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "when": "editorTextFocus",
+                    "command": "extension.chinese-change-var"
+                }
+            ]
+        },
+        "configuration": {
+            "type": "object",
+            "title": "变量翻译引擎配置",
+            "properties": {
+                "translateV3.translationEngine": {
+                    "type": "string",
+                    "enum": [
+                        "google",
+                        "bing",
+                        "baidu"
+                    ],
+                    "enumDescriptions": [
+                        "谷歌",
+                        "必应",
+                        "百度"
+                    ],
+                    "default": "baidu",
+                    "description": "翻译引擎"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/glob": "^7.2.0",
+        "@types/mocha": "^9.1.0",
+        "@types/node": "14.x",
+        "@types/vscode": "^1.66.0",
+        "@typescript-eslint/eslint-plugin": "^5.16.0",
+        "@typescript-eslint/parser": "^5.16.0",
+        "@vscode/test-electron": "^2.1.3",
+        "eslint": "^8.11.0",
+        "glob": "^7.2.0",
+        "mocha": "^9.2.2",
+        "typescript": "^4.5.5"
+    },
+    "dependencies": {
+        "baidu-translate-api": "^0.4.3",
+        "bing-translate-api": "^2.5.0",
+        "change-case": "^4.1.2",
+        "translate-google": "^1.5.0"
+    }
+}
